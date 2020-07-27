@@ -1,0 +1,55 @@
+spring:
+  main:
+    allow-bean-definition-overriding: true #当遇到同样名字的时候，是否允许覆盖注册
+#  热部署配置
+  devtools:
+    restart:
+      enabled: true
+      additional-paths: src/main/java
+#  redis配置
+  redis:
+    host: localhost
+    database: 0
+    port: 6379
+    password:
+    jedis:
+      pool:
+        max-active: 8
+        max-wait: -1ms
+        max-idle: 8
+        min-idle: 0
+    timeout: 3000ms
+
+  freemarker:
+    cache: false
+  application:
+    name: restful-api
+  datasource:
+    url: jdbc:mysql://localhost:3306/test?useUnicode=yes&characterEncoding=UTF-8&useSSL=false&serverTimezone=UTC
+    username: root
+    password: root
+    platform: mysql
+  jpa:
+    hibernate:
+      ddl-auto: update
+      show-sql: true
+
+#jwt配置
+jwt:
+  tokenHeader: Authorization #JWT存储的请求头
+  secret: mySecret #JWT加解密使用的密钥
+  expiration: 604800 #JWT的超期限时间(60*60*24)
+  tokenHead: Bearer  #JWT负载中拿到开头
+# 服务配置
+server:
+  servlet:
+    context-path: /api
+  port: 8888
+# 自定义redis key
+redis:
+  key:
+    prefix:
+      authCode: "portal:authCode:"
+    expire:
+      authCode: 120 # 验证码超期时间
+
